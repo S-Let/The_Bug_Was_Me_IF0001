@@ -32,12 +32,12 @@ public class Map {
     }
 
     public void placeHero(Hero hero){
-        hero.setPosX(1);
-        hero.setPosY(1);
+        hero.setPosX(0);
+        hero.setPosY(0);
 
     }
 
-    public void placeEnemy(Enemy enemy){ //Genera coodenadas aleatorias, verifica que sean validas,
+    public void placeEnemy(Enemy enemy){ //Genera cordenadas aleatorias, verifica que sean validas,
         // verifica que no haya otro enemigo, asigna la posicion, lo regisra en el arreglo de enemigos
         Random random = new Random();
         int x;
@@ -83,7 +83,6 @@ public class Map {
                 return;
             }
         }
-
     }
 
     public int [] getDoorPosition(){

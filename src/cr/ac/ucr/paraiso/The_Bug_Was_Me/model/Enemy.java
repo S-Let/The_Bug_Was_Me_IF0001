@@ -11,7 +11,16 @@ public class Enemy extends Character {
     }
 
     public void actAI (Map map,Hero hero){//vacio
+        if (hero == null || map == null) return;
+        if (isAdjacent(hero)) {
+            attack(hero);
+            return;
+        }
 
+    }
+
+    private boolean isAdjacent(Hero hero) {
+        return false;
     }
 
     public int getRewardGold() {

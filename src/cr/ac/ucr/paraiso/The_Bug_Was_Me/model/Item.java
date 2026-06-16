@@ -4,14 +4,11 @@ public class Item {
     private String name;
     private String description;
     private String itemType;
-    private int effectalue;
+    private int effectValue;
 
     public void appleEffect (Hero hero){
 
     }
-
-
-
 
 
 

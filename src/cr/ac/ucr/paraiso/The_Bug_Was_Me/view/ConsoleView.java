@@ -12,8 +12,8 @@ public class ConsoleView {
         //mostrar vida, oro, etc.
     }
 
-    public void displayMessage(String message){
-        System.out.println(message);
+    public void displayMessage (String message){
+         System.out.println(message);
     }
 
     public void displayMenu(){
