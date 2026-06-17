@@ -53,30 +53,28 @@ public class ConsoleView {
 
     public void displayHeroStatus(Hero hero){
         //mostrar vida, oro, etc.
+        String llave = hero.getHasKey()
+                ? ANSI_YELLOW + ANSI_BOLD + "K" + ANSI_CYAN
+                : "-";
+
         System.out.println(ANSI_CYAN + ANSI_BOLD +
-                "╔══════════════════════════════╗");
-        System.out.println("║        ESTADO HÉROE         ║");
-        System.out.println("╚══════════════════════════════╝"
-                + ANSI_RESET);
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 
-        System.out.println(ANSI_GREEN + "Vida: "
-                + hero.getCurrentLife() + "/"
-                + hero.getMaxLife()
-                + ANSI_RESET);
+        System.out.println("■ HÉROE: "
+                + ANSI_GREEN + hero.getName()
+                + ANSI_WHITE + " [" + hero.getTypeClass() + "]");
 
-        System.out.println(ANSI_YELLOW + "Oro: "
-                + hero.getGoldAccumulated()
-                + ANSI_RESET);
+        System.out.println("■ HP: "
+                + ANSI_GREEN + hero.getCurrentLife() + "/" + hero.getMaxLife()
+                + ANSI_WHITE + "    ORO: "
+                + ANSI_YELLOW + hero.getGoldAccumulated() + "g");
 
-        System.out.println(ANSI_BLUE + "Clase: "
-                + hero.getTypeClass()
-                + ANSI_RESET);
+        System.out.println("■ LLAVE: "
+                + llave);
 
-        System.out.println(ANSI_CYAN + "Llave: "
-                + (hero.getHasKey() ? "Sí" : "No")
+        System.out.println(ANSI_CYAN + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
                 + ANSI_RESET);
-
-        System.out.println();
     }
 
     public void displayMessage (String message){
@@ -89,20 +87,23 @@ public class ConsoleView {
 
     public void displayMenu(){
         // mostrar opciones: mover, atacar, usar item...
-        System.out.println(ANSI_WHITE + ANSI_BOLD +
-                "========== MENÚ =========="
+        System.out.println(ANSI_CYAN + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+
+        System.out.println("■ " + ANSI_WHITE + "MENÚ DE ACCIONES");
+
+        System.out.println("■ " + ANSI_GREEN + "[W]" + ANSI_WHITE + " Mover Arriba");
+        System.out.println("■ " + ANSI_GREEN + "[S]" + ANSI_WHITE + " Mover Abajo");
+        System.out.println("■ " + ANSI_GREEN + "[A]" + ANSI_WHITE + " Mover Izquierda");
+        System.out.println("■ " + ANSI_GREEN + "[D]" + ANSI_WHITE + " Mover Derecha");
+
+        System.out.println("■ " + ANSI_YELLOW + "[I]" + ANSI_WHITE + " Usar Item");
+        System.out.println("■ " + ANSI_CYAN + "[G]" + ANSI_WHITE + " Guardar Partida");
+        System.out.println("■ " + ANSI_RED + "[Q]" + ANSI_WHITE + " Salir");
+
+        System.out.println(ANSI_CYAN + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
                 + ANSI_RESET);
-
-        System.out.println(ANSI_GREEN + "[W]" + ANSI_RESET + " Arriba");
-        System.out.println(ANSI_GREEN + "[S]" + ANSI_RESET + " Abajo");
-        System.out.println(ANSI_GREEN + "[A]" + ANSI_RESET + " Izquierda");
-        System.out.println(ANSI_GREEN + "[D]" + ANSI_RESET + " Derecha");
-
-        System.out.println(ANSI_YELLOW + "[I]" + ANSI_RESET + " Usar Item");
-        System.out.println(ANSI_CYAN + "[G]" + ANSI_RESET + " Guardar Partida");
-        System.out.println(ANSI_RED + "[Q]" + ANSI_RESET + " Salir");
-
-        System.out.println();
     }
     public void clearScreen(){
         // limpiar pantalla
