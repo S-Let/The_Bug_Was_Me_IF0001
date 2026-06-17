@@ -81,8 +81,7 @@ public class Map {
         if(isCellTransitable(1,1)){
             hero.setPosX(1);
             hero.setPosY(1);
-    }
-
+        }
     }
 
     public void placeEnemy(Enemy enemy){ //Genera cordenadas aleatorias, verifica que sean validas,
