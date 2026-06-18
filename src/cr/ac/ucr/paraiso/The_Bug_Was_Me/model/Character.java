@@ -18,15 +18,19 @@ public class Character {
     }
 
     public void attack (Character target){ //personaje a objetivo
-
+        target.receiveDamage(this.attackStrength);
     }
 
     public void receiveDamage (int amount){
+        currentLife -= amount;
+        if (currentLife <= 0){
+            currentLife = 0;
+        }
 
     }
 
     public boolean isAlive (){
-        return true; //metodo vacio
+        return currentLife > 0;
     }
 
     public String getName () {

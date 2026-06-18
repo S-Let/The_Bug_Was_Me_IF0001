@@ -19,19 +19,58 @@ public class GameController {
     }
     public void startGame(){
         // inicia juego
+       // console.displayMap(map,hero,enemies);
     }
 
-    public void processTurn(){
+    public void processTurn(int dx,int dy){
         // controlar turno del jugador
+        hero.setPosX(hero.getPosX() + dx);
+        hero.setPosY(hero.getPosY() + dy);
+
+        checkCombat();
+        checkVictory();
+        checDefeat();
+       // console.displayMap(map,hero,enemies);
     }
     public void checkCombat(){
         // verifica si existe un combate
+        for (int i = 0; i < enemies.length; i++){
+            Enemy enemy = enemies[i];
+
+            if (enemy!= null && hero.getPosX() == enemy.getPosX() && hero.getPosY() == enemy.getPosY()){
+                System.out.println("Combate contra: " + enemy.getName());
+
+                hero.attack(enemy);
+
+                if (enemy.isAlive()){
+                    enemy.attack(hero);
+                    System.out.println("Vida de héroe: " + hero.getCurrentLife());
+                } else{
+                    System.out.println("¡Enemigo derrotado!" + enemy.getName());
+                    enemies[i] = null; // elimina enemigo
+                }
+            }
+        }
     }
+
     public void checkVictory(){
-        // verifica victoria
+        // verifica victoria si elemina a todos los enemigos
+
+        boolean allDead = true;
+        for (int i =0; i < enemies.length; i++){
+            if (enemies[i] == null){
+                allDead = false;
+            }
+        }
+        if (allDead){
+            System.out.println("¡Victoria!");
+        }
     }
     public void checDefeat(){
         //verifica derrota
+        if (!hero.isAlive()){
+            System.out.println("¡Has sido derrotado!");
+        }
     }
     public void saveGame(){
         //Guarda el estado del juego
