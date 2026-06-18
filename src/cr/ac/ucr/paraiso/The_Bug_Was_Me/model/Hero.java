@@ -1,6 +1,7 @@
 package cr.ac.ucr.paraiso.The_Bug_Was_Me.model;
 
 public class Hero extends Character{
+   // hola
     private String typeClass;
     private int goldAccumulated;
     private boolean hasKey;
