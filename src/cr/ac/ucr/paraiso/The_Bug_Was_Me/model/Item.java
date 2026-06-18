@@ -7,10 +7,8 @@ public class Item {
     private int effectValue;
 
     public void appleEffect (Hero hero){
+        if(itemType.equals("Pocion de Vida")){
 
+        }
     }
-
-
-
-
 }
