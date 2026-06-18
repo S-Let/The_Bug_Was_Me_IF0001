@@ -76,4 +76,7 @@ public class Character {
     public void setPosY(int posY) {
         this.posY = posY;
     }
+
+    protected void takeDamage(int damage) {
+    }
 }
