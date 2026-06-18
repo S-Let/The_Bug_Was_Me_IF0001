@@ -5,13 +5,56 @@ public class Map {
     private Cell [][] grid;
     private Enemy[] enemies;
 
-    public Map(Cell[][] grid, Enemy[] enemies) {
-        this.grid = grid;
-        this.enemies = enemies;
+    public Map(){
+        grid = new Cell[10][10];
+        enemies = new Enemy[4];
+        inicializeMap();
     }
 
     public void inicializeMap (){
+        grid = new Cell[10][10];
+        String[] design = {
+                "##########",
+                "#@.......#",
+                "#..###...#",
+                "#........#",
+                "####..####",
+                "#........#",
+                "#..###...#",
+                "#...K....#",
+                "#......D.#",
+                "##########"
+        };
 
+        for (int i = 0; i < grid.length; i ++){
+            for (int j = 0; j < grid[0].length; j++){
+
+                char symbol = design[i].charAt(j);
+
+                switch (symbol){
+                    case '#':
+                        grid[i][j] = new Cell('#', false);
+                        break;
+
+                    case '.':
+                        grid[i][j] = new Cell('.', true);
+                        break;
+
+                    case '@':
+                        grid[i][j] = new Cell('.', true); // posición inicial del héroe
+                        break;
+
+                    case 'K':
+                        grid[i][j] = new Cell('K', true);
+                        break;
+
+                    case 'D':
+                        grid[i][j] = new Cell('D', true);
+                        break;
+
+                }
+            }
+        }
     }
 
     public boolean isCellTransitable (int x, int y){
@@ -23,6 +66,9 @@ public class Map {
     }
 
     public Cell getCell(int x, int y){
+        if (!isValidPosition(x,y)){
+            return null;
+        }
         return grid[x][y];
     }
 
@@ -31,10 +77,11 @@ public class Map {
                 y >= 0 && y < grid[0].length;
     }
 
-    public void placeHero(Hero hero){
-        hero.setPosX(0);
-        hero.setPosY(0);
-
+    public void placeHero(Hero hero) {
+        if(isCellTransitable(1,1)){
+            hero.setPosX(1);
+            hero.setPosY(1);
+        }
     }
 
     public void placeEnemy(Enemy enemy){ //Genera cordenadas aleatorias, verifica que sean validas,
@@ -87,14 +134,14 @@ public class Map {
 
     public int [] getDoorPosition(){
 
-        //int[] position = {8,4};
+        //int[] position = {8,7};
         //return position;
         //otra forma de ponerlo es así
-        return new int[]{4,8};//poner aquí la posición de la llave {4,8}(por ejemplo);
+        return new int[]{8,7};//poner aquí la posición de la llave {4,8}(por ejemplo);
     }
 
     public int[] getKeyPosition(){
-        return new int[]{8,4};//poner aquí la posición de la puerta {8,4}(por ejemplo);
+        return new int[]{7,4};//poner aquí la posición de la puerta {7,4}(por ejemplo);
     }
 
 
