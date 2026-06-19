@@ -9,17 +9,17 @@ public class GameController {
     private Hero hero;
     private Map map;
     private Enemy[] enemies;
-    private ConsoleView console;
+    private ConsoleView view;
 
-    public GameController(Hero hero, Map map, Enemy[] enemies, ConsoleView console) {
+    public GameController(Hero hero, Map map, Enemy[] enemies, ConsoleView view) {
         this.hero = hero;
         this.map = map;
         this.enemies = enemies;
-        this.console = console;
+        this.view = view;
     }
     public void startGame(){
         // inicia juego
-       // console.displayMap(map,hero,enemies);
+       // view.displayMap(map,hero,enemies);
     }
 
     public void processTurn(int dx,int dy){
@@ -30,7 +30,7 @@ public class GameController {
         checkCombat();
         checkVictory();
         checDefeat();
-       // console.displayMap(map,hero,enemies);
+       // view.displayMap(map,hero,enemies);
     }
     public void checkCombat(){
         // verifica si existe un combate
@@ -38,15 +38,15 @@ public class GameController {
             Enemy enemy = enemies[i];
 
             if (enemy!= null && hero.getPosX() == enemy.getPosX() && hero.getPosY() == enemy.getPosY()){
-                System.out.println("Combate contra: " + enemy.getName());
+                view.displayMessage("Combate contra: " + enemy.getName());
 
                 hero.attack(enemy);
 
                 if (enemy.isAlive()){
                     enemy.attack(hero);
-                    System.out.println("Vida de héroe: " + hero.getCurrentLife());
+                    view.displayMessage("Vida de héroe: " + hero.getCurrentLife());
                 } else{
-                    System.out.println("¡Enemigo derrotado!" + enemy.getName());
+                    view.displayMessage("¡Enemigo derrotado!" + enemy.getName());
                     enemies[i] = null; // elimina enemigo
                 }
             }
@@ -63,13 +63,13 @@ public class GameController {
             }
         }
         if (allDead){
-            System.out.println("¡Victoria!");
+            view.displayMessage("¡Victoria!");
         }
     }
     public void checDefeat(){
         //verifica derrota
         if (!hero.isAlive()){
-            System.out.println("¡Has sido derrotado!");
+            view.displayError("¡Has sido derrotado!");
         }
     }
     public void saveGame(){

@@ -3,6 +3,8 @@ package cr.ac.ucr.paraiso.The_Bug_Was_Me.view;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Hero;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Map;
 
+import java.util.Scanner;
+
 public class ConsoleView {
 
     // Códigos ANSI para colores de consola
@@ -15,6 +17,11 @@ public class ConsoleView {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    private Scanner sc;
+
+    public ConsoleView(){
+        sc = new Scanner(System.in);
+    }
 
     public void displayMap(Map map, Hero hero){
         // Mostrar el mapa
@@ -85,7 +92,7 @@ public class ConsoleView {
         System.out.println(ANSI_RED + message + ANSI_RESET);
     }
 
-    public void displayMenu(){
+    public int displayMenu(){
         // mostrar opciones: mover, atacar, usar item...
         System.out.println(ANSI_CYAN + ANSI_BOLD +
                 "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
@@ -104,7 +111,10 @@ public class ConsoleView {
         System.out.println(ANSI_CYAN + ANSI_BOLD +
                 "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
                 + ANSI_RESET);
+
+        return sc.nextInt();
     }
+
     public void clearScreen(){
         // limpiar pantalla
         System.out.print("\033[H\033[2J");
