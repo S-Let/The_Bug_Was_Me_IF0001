@@ -1,5 +1,6 @@
 package cr.ac.ucr.paraiso.The_Bug_Was_Me.view;
 
+import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Enemy;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Hero;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Map;
 

@@ -19,19 +19,25 @@ public class GameController {
     }
     public void startGame(){
         // inicia juego
-       // view.displayMap(map,hero,enemies);
+       view.displayMap(map,hero);
     }
 
     public void processTurn(int dx,int dy){
         // controlar turno del jugador
-        hero.setPosX(hero.getPosX() + dx);
-        hero.setPosY(hero.getPosY() + dy);
+        int newx  = hero.getPosX() + dx;
+        int newy = hero.getPosY() + dy;
+
+        if(map.isCellTransitable(newx,newy)){
+            hero.setPosX(newx);
+            hero.setPosY(newy);
+        }
 
         checkCombat();
         checkVictory();
-        checDefeat();
-       // view.displayMap(map,hero,enemies);
+        checkDefeat();
+       view.displayMap(map,hero);
     }
+
     public void checkCombat(){
         // verifica si existe un combate
         for (int i = 0; i < enemies.length; i++){
@@ -47,7 +53,7 @@ public class GameController {
                     view.displayMessage("Vida de héroe: " + hero.getCurrentLife());
                 } else{
                     view.displayMessage("¡Enemigo derrotado!" + enemy.getName());
-                    enemies[i] = null; // elimina enemigo
+                    enemies[i] = null;
                 }
             }
         }
@@ -56,17 +62,15 @@ public class GameController {
     public void checkVictory(){
         // verifica victoria si elemina a todos los enemigos
 
-        boolean allDead = true;
         for (int i =0; i < enemies.length; i++){
             if (enemies[i] == null){
-                allDead = false;
+                view.displayMessage("¡Victoria!");
             }
         }
-        if (allDead){
-            view.displayMessage("¡Victoria!");
-        }
+
+
     }
-    public void checDefeat(){
+    public void checkDefeat(){
         //verifica derrota
         if (!hero.isAlive()){
             view.displayError("¡Has sido derrotado!");

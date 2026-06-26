@@ -17,27 +17,31 @@ public class Character {
         this.posY = posY;
     }
 
-    public void attack (Character target){ //personaje a objetivo
-        target.receiveDamage(this.attackStrength);
+    public void attack(Character target) { //personaje a objetivo
+        if (target != null && target.isAlive()) {
+            target.receiveDamage(this.attackStrength);
+        }
     }
 
-    public void receiveDamage (int amount){
-        currentLife -= amount;
-        if (currentLife <= 0){
+    public void receiveDamage(int amount) {
+        takeDamage(amount);
+    }
+
+    protected void takeDamage(int damage) {
+        currentLife -= damage;
+        if(currentLife <= 0) {
             currentLife = 0;
         }
-
     }
-
-    public boolean isAlive (){
+    public boolean isAlive() {
         return currentLife > 0;
     }
 
-    public String getName () {
+    public String getName() {
         return name;
     }
 
-    public void setName (String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -81,6 +85,5 @@ public class Character {
         this.posY = posY;
     }
 
-    protected void takeDamage(int damage) {
-    }
+
 }
