@@ -6,8 +6,6 @@ import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Hero;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Map;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.view.ConsoleView;
 
-import java.util.HashMap;
-
 public class Main {
     public static void main (String [] args){
 
