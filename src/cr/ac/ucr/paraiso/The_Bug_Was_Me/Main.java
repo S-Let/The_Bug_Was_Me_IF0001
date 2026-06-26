@@ -18,7 +18,7 @@ public class Main {
           map.placeEnemy(enemies[i]);
       }
 
-
+ // areglar mapa sale doble, scaner nombre de heroe, inventario, key, puerta, items,
         ConsoleView view = new ConsoleView();
         GameController controller = new GameController(hero,map,enemies,view);
 

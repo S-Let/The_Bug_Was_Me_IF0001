@@ -17,7 +17,7 @@ public class ConsoleView {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-
+// nombre de heroe
     private Scanner sc;
 
     public ConsoleView(){
@@ -93,7 +93,7 @@ public class ConsoleView {
         System.out.println(ANSI_RED + message + ANSI_RESET);
     }
 
-    public int displayMenu(){
+    public char displayMenu(){
         // mostrar opciones: mover, atacar, usar item...
         System.out.println(ANSI_CYAN + ANSI_BOLD +
                 "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
@@ -113,7 +113,7 @@ public class ConsoleView {
                 "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
                 + ANSI_RESET);
 
-        return sc.nextInt();
+        return Character.toUpperCase(sc.next().charAt(0));
     }
 
     public void clearScreen(){
