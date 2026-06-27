@@ -49,6 +49,12 @@ public class Main {
                 case 'D':
                     controller.processTurn(0, 1);
                     break;
+                case 'G':
+                    controller.saveGame();
+                    break;
+                case 'L':
+                    controller.loadGame();
+                    break;
 
                 default:
                     view.displayError("Opción inválida");

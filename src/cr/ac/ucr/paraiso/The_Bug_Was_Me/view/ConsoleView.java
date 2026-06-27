@@ -107,6 +107,7 @@ public class ConsoleView {
 
         System.out.println("■ " + ANSI_YELLOW + "[I]" + ANSI_WHITE + " Usar Item");
         System.out.println("■ " + ANSI_CYAN + "[G]" + ANSI_WHITE + " Guardar Partida");
+        System.out.println("■ " + ANSI_CYAN + "[L]" + ANSI_WHITE + " Cargar Partida");
         System.out.println("■ " + ANSI_RED + "[Q]" + ANSI_WHITE + " Salir");
 
         System.out.println(ANSI_CYAN + ANSI_BOLD +

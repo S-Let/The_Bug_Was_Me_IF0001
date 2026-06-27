@@ -5,6 +5,12 @@ import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Hero;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Map;
 import cr.ac.ucr.paraiso.The_Bug_Was_Me.view.ConsoleView;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class GameController {
     private Hero hero;
     private Map map;
@@ -78,10 +84,48 @@ public class GameController {
     }
     public void saveGame(){
         //Guarda el estado del juego
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("Partida.txt"));
+            writer.println(hero.getName());
+            writer.println(hero.getCurrentLife());
+            writer.println(hero.getMaxLife());
+            writer.println(hero.getAttackStrength());
+            writer.println(hero.getPosX());
+            writer.println(hero.getPosY());
+            writer.println(hero.getGoldAccumulated());
+
+            writer.println(hero.getHasKey());
+            writer.close();
+
+            view.displayMessage("Partida guardada");
+        } catch (IOException e) {
+            view.displayMessage("Error al guardar partida");
+        }
     }
     public void loadGame(){
         // Carga estado del juego
+        try{
+            Scanner archivo = new Scanner(new File("Partida.txt"));
+
+            hero.setName(archivo.nextLine());
+            hero.setCurrentLife(Integer.parseInt(archivo.nextLine()));
+            hero.setMaxLife(Integer.parseInt(archivo.nextLine()));
+            hero.setAttackStrength(Integer.parseInt(archivo.nextLine()));
+            hero.setPosX(Integer.parseInt(archivo.nextLine()));
+            hero.setPosY(Integer.parseInt(archivo.nextLine()));
+            hero.setGoldAccumulated(Integer.parseInt(archivo.nextLine()));
+            hero.setHasKey(Boolean.parseBoolean(archivo.nextLine()));
+
+            archivo.close();
+
+            view.displayMessage("Partida Cargada");
+
+        } catch(IOException e){
+            view.displayError("No existe una partida guardada");
+        }
+    }
+
     }
 
 
-}
+
