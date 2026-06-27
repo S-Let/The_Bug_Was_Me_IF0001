@@ -16,8 +16,9 @@ public class Hero extends Character{
     }
     @Override
     public void attack (Character target){
-
+         super.attack(target);
     }
+
     public void move (char address, Map map){
         int x = getPosX();
         int y = getPosY();

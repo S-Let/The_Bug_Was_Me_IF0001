@@ -16,6 +16,7 @@ public class GameController {
     private Map map;
     private Enemy[] enemies;
     private ConsoleView view;
+    private boolean victory = false;
 
     public GameController(Hero hero, Map map, Enemy[] enemies, ConsoleView view) {
         this.hero = hero;
@@ -58,24 +59,29 @@ public class GameController {
                     enemy.attack(hero);
                     view.displayMessage("Vida de héroe: " + hero.getCurrentLife());
                 } else{
-                    view.displayMessage("¡Enemigo derrotado!" + enemy.getName());
+                    view.displayMessage("¡Enemigo derrotado! ");
                     enemies[i] = null;
+                    view.displayMessage("¡Victoria!");
                 }
             }
         }
     }
 
     public void checkVictory(){
-        // verifica victoria si elemina a todos los enemigos
-
+        // verifica victoria si elemina a un enemigo
+        if (victory){
+            return;
+        }
         for (int i =0; i < enemies.length; i++){
-            if (enemies[i] == null){
-                view.displayMessage("¡Victoria!");
+            if (enemies[i] != null){
+                return;
             }
         }
-
+        victory = true;
+        view.displayMessage("¡Eliminaste a todos los enemigos!");
 
     }
+
     public void checkDefeat(){
         //verifica derrota
         if (!hero.isAlive()){

@@ -50,6 +50,7 @@ public class Main {
                     controller.processTurn(0, 1);
                     break;
                 case 'G':
+
                     controller.saveGame();
                     break;
                 case 'L':

@@ -7,7 +7,7 @@ public class Map {
 
     public Map(){
         grid = new Cell[10][10];
-        enemies = new Enemy[4];
+        enemies = new Enemy[5];
         inicializeMap();
     }
 
