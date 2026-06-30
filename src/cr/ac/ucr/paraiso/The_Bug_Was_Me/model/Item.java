@@ -6,9 +6,24 @@ public class Item {
     private String itemType;
     private int effectValue;
 
-    public void appleEffect (Hero hero){
-        if(itemType.equals("Pocion de Vida")){
+    public void applyEffect(Hero hero) {
 
+        if(itemType.equals("POCION_VIDA")) {
+
+            int newLife = hero.getCurrentLife() + effectValue;
+
+            if(newLife > hero.getMaxLife()) {
+                newLife = hero.getMaxLife();
+            }
+
+            hero.setCurrentLife(newLife);
+        }
+
+        else if(itemType.equals("ARMA_ATAQUE")) {
+
+            hero.setAttackStrength(
+                    hero.getAttackStrength() + effectValue
+            );
         }
     }
 }

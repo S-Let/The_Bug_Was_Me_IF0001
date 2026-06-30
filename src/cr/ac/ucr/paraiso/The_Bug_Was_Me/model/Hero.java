@@ -25,6 +25,21 @@ public class Hero extends Character{
         if (map.isCellTransitable(x, y)){
             setPosX(x);
             setPosY(y);
+            switch (Character.toUpperCase(direction)) {
+                case 'W':
+                    y--;
+                    break;
+                case 'S':
+                    y++;
+                    break;
+                case 'A':
+                    x--;
+                    break;
+                case 'D':
+                    x++;
+                    break;
+                default:
+                    return;
         }
     }
 
@@ -35,7 +50,7 @@ public class Hero extends Character{
         if(inventory[index] == null){
             return false;
         }
-        inventory[index].appleEffect(this);
+        inventory[index].applyEffect();
 
         // una vez usado sedebe eliminar el objeto(hay que hacerlo)
         return true;
