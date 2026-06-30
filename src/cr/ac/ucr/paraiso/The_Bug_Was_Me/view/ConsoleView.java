@@ -1,8 +1,5 @@
 package cr.ac.ucr.paraiso.The_Bug_Was_Me.view;
 
-import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Enemy;
-import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Hero;
-import cr.ac.ucr.paraiso.The_Bug_Was_Me.model.Map;
 
 import java.util.Scanner;
 
@@ -17,25 +14,29 @@ public class ConsoleView {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-// nombre de heroe
     private Scanner sc;
 
     public ConsoleView(){
         sc = new Scanner(System.in);
     }
 
-    public void displayMap(Map map, Hero hero){
-        // Mostrar el mapa
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+    /**
+     * Recibe una matriz de caracteres que representa el mapa
+     * y la posición del héroe para mostrarla
+     */
 
-                if (hero.getPosX() == i && hero.getPosY() == j){
+    public void displayMap(char[][] mapGrid, int heroX, int heroY, boolean[][] enemyPositions){
+        // Mostrar el mapa
+        for (int i = 0; i <  mapGrid.length; i++) {
+            for (int j = 0; j < mapGrid[i].length; j++) {
+
+                if (heroX == i && heroY == j){
                     System.out.print(ANSI_GREEN + ANSI_BOLD + "@ " + ANSI_RESET);
 
-                } else if (map.hasEnemyAt(i,j)) {
+                } else if (enemyPositions[i][j]) {
                     System.out.print(ANSI_RED + ANSI_BOLD + "E " + ANSI_RESET);
 
-                } else { char symbol = map.getCell(i,j).getSymbol();
+                } else { char symbol = mapGrid[i][j];
 
                     switch(symbol){
                         case '#':
@@ -59,23 +60,26 @@ public class ConsoleView {
         }
     }
 
-    public void displayHeroStatus(Hero hero){
+    /**
+     * Recibe los datos del héroe como valores primitivos
+     */
+
+    public void displayHeroStatus(String heroName, String heroClass, int currentLife, int maxLife, int gold, boolean hasKey){
         //mostrar vida, oro, etc.
-        String llave = hero.getHasKey()
-                ? ANSI_YELLOW + ANSI_BOLD + "K" + ANSI_CYAN
-                : "-";
+        String llave =  hasKey ? ANSI_YELLOW + ANSI_BOLD + "K" + ANSI_CYAN : "-";
+
 
         System.out.println(ANSI_CYAN + ANSI_BOLD +
                 "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 
         System.out.println("■ HÉROE: "
-                + ANSI_GREEN + hero.getName()
-                + ANSI_WHITE + " [" + hero.getTypeClass() + "]");
+                + ANSI_GREEN + heroName
+                + ANSI_WHITE + " [" + heroClass + "]");
 
         System.out.println("■ HP: "
-                + ANSI_GREEN + hero.getCurrentLife() + "/" + hero.getMaxLife()
+                + ANSI_GREEN + currentLife + "/" + maxLife
                 + ANSI_WHITE + "    ORO: "
-                + ANSI_YELLOW + hero.getGoldAccumulated() + "g");
+                + ANSI_YELLOW + gold + "g");
 
         System.out.println("■ LLAVE: "
                 + llave);
@@ -117,9 +121,62 @@ public class ConsoleView {
         return Character.toUpperCase(sc.next().charAt(0));
     }
 
+    /**
+     * Menú para cuando el héroe muere
+     */
+    public char displayGameOverMenu() {
+        System.out.println(ANSI_RED + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println("■         GAME OVER");
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println("■ " + ANSI_WHITE + "[R]" + ANSI_WHITE + " Reiniciar");
+        System.out.println("■ " + ANSI_WHITE + "[Q]" + ANSI_WHITE + " Salir");
+        System.out.println(ANSI_RED + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
+                + ANSI_RESET);
+        return Character.toUpperCase(sc.next().charAt(0));
+    }
+
+    /**
+     * Muestra los items del inventario
+     */
+    public void displayInventory(String[] itemNames, int[] itemEffects) {
+        System.out.println(ANSI_CYAN + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println("■ " + ANSI_WHITE + "INVENTARIO");
+        for (int i = 0; i < itemNames.length; i++) {
+            if (itemNames[i] != null) {
+                System.out.println("■ [" + i + "] " + ANSI_YELLOW + itemNames[i]
+                        + ANSI_WHITE + " (Efecto: " + itemEffects[i] + ")");
+            } else {
+                System.out.println("■ [" + i + "] " + ANSI_WHITE + "(Vacío)");
+            }
+        }
+        System.out.println(ANSI_CYAN + ANSI_BOLD +
+                "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
+                + ANSI_RESET);
+    }
+
+    /**
+     * Obtiene la entrada del usuario para usar un item
+     */
+    public int getUserItemSelection() {
+        System.out.print("Selecciona el índice del item a usar: ");
+        try {
+            return Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
     public void clearScreen(){
         // limpiar pantalla
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
+    public void closeScanner() {
+        sc.close();
+    }
+
 }

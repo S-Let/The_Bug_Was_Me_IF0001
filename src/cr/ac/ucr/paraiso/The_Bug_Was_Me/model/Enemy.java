@@ -46,7 +46,7 @@ public class Enemy extends Character {
     private void attack(Hero hero) {
         int damage = this.getAttackStrength();
         hero.takeDamage(damage);
-        System.out.println(this.getName() + " atacó a " + hero.getName() + " por " + damage + " daño!");
+        System.out.println(this.getName() + " atacó a " + hero.getName() + " por " + damage + " daño!"); //Aquí no va el System.out
     }
     public void setRewardGold(int rewardGold) {
         this.rewardGold = rewardGold;
